@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réservation de bus</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+  <link rel="stylesheet" href="Assets/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <style>
+    /* Styles généraux */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    /* Header */
+    header {
+      /*background-color: #6d6151;*/
+      background-color: #6d6151;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    /* Navigation */
+    nav {
+      background-color: #efb064;
+      padding: 10px;
+      text-align: center;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px;
+    }
+    /* Section principale */
+    .main-section {
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Formulaire de recherche */
+    .search-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .search-form label {
+      display: block;
+      margin-bottom: 10px;
+      background-color: #d2eeff;
+    }
+    .search-form input[type="text"],
+    .search-form select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    .search-form button {
+      background-color: #efb064;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    
+    .rubrique {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #060606;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .item {
+      width: 23%;
+      text-align: center;
+    }
+
+    .item img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    h2 {
+      font-size: 13px;
+      margin: 10px 0;
+    }
+
+    p {
+      font-size: 16px;
+      color: #080808;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #efb064;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+  <script>
+    $(function() {
+      $("#date").datepicker({
+        dateFormat: "dd/mm/yy"
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Logo / Slogan</h1>
+    </div>
+    <div>
+      <a href="#" style="margin-left: 10px;">Connexion</a>
+      <a href="#">Créer un compte</a>
+    </div>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#">Trajet</a></li>
+      <li><a href="#">Place</a></li>
+      <li><a href="#">Comment ça marche ?</a></li>
+      <li><a href="#">Contactez-nous</a></li>
+    </ul>
+    <section class="main-section">
+        <div class="search-form">
+          <!-- Votre formulaire existant ici -->
+        </div>
+      
+        <div class="description-section">
+          <h3>Comment ça marche ?</h3>
+          <p>Dans la section de réservation, vous pouvez choisir votre trajet en sélectionnant le lieu de départ et le lieu d'arrivée parmi les options proposées. Ensuite, spécifiez la date de votre voyage, l'heure souhaitée et le nombre de places nécessaires. Une fois que vous avez rempli ces informations, cliquez sur le bouton 'RECHERCHER' pour valider votre réservation. Nous vous présenterons alors les options disponibles en fonction de vos préférences. Vous pourrez ainsi choisir votre ticket et réserver votre place en toute simplicité.</p>
+          <style>
+            /* ... Vos styles existants ... */
+          
+            .description-section {
+              display: none;
+            }
+          </style>
+          
+          <script>
+            $(function() {
+              $("a[href='#comment']").on("click", function(e) {
+                e.preventDefault();
+                $(".description-section").toggle();
+              });
+            });
+          </script>
+          
+        </div>
+      </section>
+      
+  </nav>
+
+  <div class="container mx-auto" style="max-width: 90%;">
+
+    <div class="row mt-5" id="main-section" style="background-image: url(./train.jpeg); background-size: cover; background-repeat: no-repeat;">
+    
+      <div class="col-5">
+        <div class="row">
+          <h2>Réservation de place BRT/TER</h2>
+          <div class="search-form">
+            <form>
+              <label for="aller-retour">Aller simple / Aller-retour:</label>
+              <select id="aller-retour">
+                <option value="aller-simple">Aller simple</option>
+                <option value="aller-retour">Aller-retour</option>
+              </select>
+              <label for="pick-up">Pick-up / Départ:</label>
+              <select id="pick-up">
+                <option value="">Choisissez une destination</option>
+                <option value="amitie-zonea">Amitié zone A</option>
+                <option value="amitie-zoneb">Amitié zone B</option>
+                <option value="baobab">Baobab</option>
+                <option value="bargny">Bargny</option>
+                <option value="beaux maraîchers">Beaux Maraîchers</option>
+                <option value="colobane">Colobane</option>
+                <option value="dakar ">Dakar</option>
+                <option value="dalifort">Dalifort</option>
+                <option value="diamniadio">Diamniadio</option>
+                <option value="grand-dakar">Grand-Dakar</option>
+                <option value="hann">Hann</option>
+                <option value="keur mbaye fall">Keur Mbaye Fall</option>
+                <option value="liberte1">Liberté 1</option>
+                <option value="liberte2">Liberté 2</option>
+                <option value="liberte3">Liberté 3</option>
+                <option value="liberte4">Liberté 4</option>
+                <option value="liberte5">Liberté 5</option>
+                <option value="liberte6">Liberté 6</option>
+                <option value="pikine">Pikine</option>
+                <option value="pnr">PNR</option>
+                <option value="rond-point petersen">Rond-point Petersen</option>
+                <option value="rond-point rts">Rond-point RTS</option>
+                <option value="rufisque">Rufisque</option>
+                <option value="sacre-coeur1">Sacré-Coeur 1</option>
+                <option value="sacre-coeur2">Sacré-Coeur 2</option>
+                <option value="sacre-coeur3">Sacré-Coeur 3</option>
+                <option value="scat-urbam">Scat-Urbam</option>
+                <option value="thiaroye">Thiaroye</option>
+                <option value="yeumbeul">Yeumbeul</option>
+              </select>
+              <label for="drop-point">Drop-point / Arrivée:</label>
+              <select id="drop-point">
+                <option value="">Choisissez une destination</option>
+                <option value="amitie-zonea">Amitié zone A</option>
+                <option value="amitie-zoneb">Amitié zone B</option>
+                <option value="baobab">Baobab</option>
+                <option value="bargny">Bargny</option>
+                <option value="beaux maraîchers">Beaux Maraîchers</option>
+                <option value="colobane">Colobane</option>
+                <option value="dakar ">Dakar</option>
+                <option value="dalifort">Dalifort</option>
+                <option value="diamniadio">Diamniadio</option>
+                <option value="grand-dakar">Grand-Dakar</option>
+                <option value="hann">Hann</option>
+                <option value="keur mbaye fall">Keur Mbaye Fall</option>
+                <option value="liberte1">Liberté 1</option>
+                <option value="liberte2">Liberté 2</option>
+                <option value="liberte3">Liberté 3</option>
+                <option value="liberte4">Liberté 4</option>
+                <option value="liberte5">Liberté 5</option>
+                <option value="liberte6">Liberté 6</option>
+                <option value="pikine">Pikine</option>
+                <option value="pnr">PNR</option>
+                <option value="rond-point petersen">Rond-point Petersen</option>
+                <option value="rond-point rts">Rond-point RTS</option>
+                <option value="rufisque">Rufisque</option>
+                <option value="sacre-coeur1">Sacré-Coeur 1</option>
+                <option value="sacre-coeur2">Sacré-Coeur 2</option>
+                <option value="sacre-coeur3">Sacré-Coeur 3</option>
+                <option value="scat-urbam">Scat-Urbam</option>
+                <option value="thiaroye">Thiaroye</option>
+                <option value="yeumbeul">Yeumbeul</option>
+              </select>
+              <label for="date">Date:</label>
+              <input type="text" id="date">
+              <label for="nombre-places">Nombre de places:</label>
+              <input type="text" id="nombre-places">
+              <button type="submit">RESERVER</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-7" id="image">
+        <div class="row h-100">
+          <div class="col-12 d-flex align-items-center justify-content-center">
+            <img src="./bus.jpeg" alt="Image de bus" class="img-fluid">
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="row mt-5" id="rubrique">
+      <div class="item">
+          <span _ngcontent-wjw-c155="" class="img-secu"></span>
+          <h2>Sécurité</h2>
+          <p>Votre sécurité et votre bien-être sont au cœur de nos préoccupations. Nous accompagnons nos partenaires pour tout mettre en œuvre pour que vous voyagiez sereinement.</p>
+      </div>
+      <div class="item">
+          <span _ngcontent-wjw-c155="" class="img-secu"></span>
+          <h2>Confort</h2>
+          <p>Nous souhaitons vous offrir la meilleure expérience de client au bord, nous mettons en place un système qui vous permettra de sélectionner les options ( wifi, toilette, bouteille d’eau etc…) que vous souhaitez avoir lors de vos voyages.
+          </p>
+      </div>
+      <div class="item">
+          <span _ngcontent-wjw-c155="" class="img-secu"></span>
+          <h2>Bas Prix</h2>
+          <p>Nous souhaitons rendre le transport en bus accessible à tous au meilleur prix. Pour cela nous mettons tout en œuvre pour vous trouver les meilleurs prix proposés par nos partenaires.</p>
+      </div>
+      <div class="item">
+          <span _ngcontent-wjw-c155="" class="img-secu"></span>
+          <h2>Service Client 24/7</h2>
+          <p>Notre priorité est votre satisfaction ! Notre équipe est à votre écoute 24h/7 au tel … ou par mail … Nous mettons notre expérience et notre savoir-faire pour apporter des solutions rapides et adéquates à tout problème que vous pourriez rencontrer en lien avec votre voyage.</p>
+      </div>
+    </div>
+
+
+  </div>  
+  <footer>
+    <p>&copy; 2023 Réservation de place. Tous droits réservés.</p>
+  </footer>
+  <script src="Assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
